@@ -1,9 +1,11 @@
 {
-"name": "gitcall-example",
-"version": "1.0.0",
-"description": "gitcall example",
-"dependencies": {
-"crypto-js": "^4.1.1",
-"moment": "^2.29.4"
-}
+  "name": "json_wrapper",
+  "version": "1.0.0",
+  "description": "Fetch by URL, wrap response into JSON for Corezoid Git Call",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "node-fetch": "2.7.0"
+  }
 }
