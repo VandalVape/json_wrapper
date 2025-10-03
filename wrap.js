@@ -1,16 +1,16 @@
-// wrap.js
+// === wrap.js (у репозиторії) ===
 const https = require("https");
 const http  = require("http");
 
 function fetchText(url, headers = {}) {
   return new Promise((resolve, reject) => {
-    const lib = url?.startsWith("https") ? https : http;
+    const lib = url.startsWith("https") ? https : http;
     const req = lib.request(url, { method: "GET", headers }, (res) => {
       const chunks = [];
       res.on("data", c => chunks.push(c));
       res.on("end", () => {
         let raw = Buffer.concat(chunks).toString("utf8");
-        if (raw && raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1); // зняти BOM
+        if (raw && raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
         resolve({ raw, status: res.statusCode, content_type: res.headers["content-type"] || "" });
       });
     });
@@ -19,7 +19,6 @@ function fetchText(url, headers = {}) {
   });
 }
 
-// ОБОВ'ЯЗКОВО: експорт функції-обробника
 async function handle(event, context) {
   const url = event?.url;
   const headers = event?.headers || { "Accept": "text/plain" };
